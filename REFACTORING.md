@@ -132,6 +132,7 @@ When refactoring an agent:
 | `marketing_strategy_agent_service.py` | 489 lines | 202 lines | `marketing_strategy_tool_executor.py` (230 lines) | Done |
 | `component_agent_service.py` | 420 lines | 193 lines | `component_tool_executor.py` (175 lines) | Done |
 | `email_agent_service.py` | 498 lines | 200 lines | `email_tool_executor.py` (260 lines) | Done |
+| `prd_agent_service.py` | 489 lines | 205 lines | `prd_tool_executor.py` (250 lines) | Done |
 
 ---
 
