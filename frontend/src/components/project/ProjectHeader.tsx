@@ -234,7 +234,10 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
 
   const handleOpenSettings = () => {
     setSettingsDialogOpen(true);
-    loadAllPrompts();
+    // Only load prompts if not already loaded
+    if (allPrompts.length === 0) {
+      loadAllPrompts();
+    }
   };
 
   return (
@@ -441,30 +444,36 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
                         >
                           <div className="border rounded-lg">
                             <CollapsibleTrigger asChild>
-                              <button className="w-full flex items-center justify-between p-3 hover:bg-muted/50 transition-colors text-left">
-                                <div className="flex items-center gap-3">
-                                  {expandedPrompts.has(promptId) ? (
-                                    <CaretDown size={16} className="text-muted-foreground" />
-                                  ) : (
-                                    <CaretRight size={16} className="text-muted-foreground" />
-                                  )}
-                                  <div>
-                                    <span className="font-medium">{formatPromptName(promptId)}</span>
-                                    <span className="text-xs text-muted-foreground ml-2">
-                                      ({prompt.filename})
-                                    </span>
+                              <button className="w-full p-3 hover:bg-muted/50 transition-colors text-left">
+                                <div className="flex items-start justify-between gap-3">
+                                  {/* Left: Caret + Title + Filename below */}
+                                  <div className="flex items-start gap-3 min-w-0">
+                                    <div className="pt-0.5">
+                                      {expandedPrompts.has(promptId) ? (
+                                        <CaretDown size={16} className="text-muted-foreground" />
+                                      ) : (
+                                        <CaretRight size={16} className="text-muted-foreground" />
+                                      )}
+                                    </div>
+                                    <div className="min-w-0">
+                                      <div className="font-medium">{formatPromptName(promptId)}</div>
+                                      <div className="text-xs text-muted-foreground">
+                                        ({prompt.filename})
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                  {prompt.model && (
-                                    <span className="bg-muted px-2 py-0.5 rounded">{prompt.model}</span>
-                                  )}
-                                  {prompt.temperature !== undefined && (
-                                    <span>temp: {prompt.temperature}</span>
-                                  )}
-                                  {prompt.max_tokens !== undefined && (
-                                    <span>max: {prompt.max_tokens.toLocaleString()}</span>
-                                  )}
+                                  {/* Right: Model + Temp + Max Tokens */}
+                                  <div className="flex items-center gap-3 text-xs text-muted-foreground shrink-0 pt-0.5">
+                                    {prompt.model && (
+                                      <span>{prompt.model}</span>
+                                    )}
+                                    {prompt.temperature !== undefined && (
+                                      <span>temp: {prompt.temperature}</span>
+                                    )}
+                                    {prompt.max_tokens !== undefined && (
+                                      <span>max: {prompt.max_tokens.toLocaleString()}</span>
+                                    )}
+                                  </div>
                                 </div>
                               </button>
                             </CollapsibleTrigger>
@@ -518,6 +527,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
             <Button
               variant="outline"
               onClick={() => setSettingsDialogOpen(false)}
+              className="bg-[#e8e7e4] border-stone-300 hover:bg-[#dcdbd8] active:bg-[#d0cfcc]"
             >
               Close
             </Button>
@@ -587,6 +597,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
             <Button
               variant="outline"
               onClick={() => setMemoryDialogOpen(false)}
+              className="bg-[#e8e7e4] border-stone-300 hover:bg-[#dcdbd8] active:bg-[#d0cfcc]"
             >
               Close
             </Button>
