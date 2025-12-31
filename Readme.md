@@ -231,7 +231,19 @@ Create `backend/.env` or configure in **Dashboard -> Settings**:
 
 ## Contributing
 
-Contributions welcome! See `CLAUDE.md` for code guidelines.
+Contributions welcome!
+
+**Branch strategy:**
+- `main` - Stable branch for testing and using NoobBook
+- `develop` - Latest changes, all PRs go here
+
+**Quick start:**
+1. Fork the repo
+2. Pull from `develop`
+3. Create your branch
+4. Open a PR to `develop` (not main)
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full details and `CLAUDE.md` for code guidelines.
 
 ---
 
